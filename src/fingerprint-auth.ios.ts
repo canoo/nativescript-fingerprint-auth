@@ -18,12 +18,8 @@ export class FingerprintAuth implements FingerprintAuthApi {
       try {
         const laContext = LAContext.new();
         const hasBio = laContext.canEvaluatePolicyError(LAPolicy.DeviceOwnerAuthenticationWithBiometrics);
-
-        resolve({
-          any: hasBio,
-          touch: hasBio && laContext.biometryType === LABiometryTypeTouchID,
-          face: hasBio && laContext.biometryType === LABiometryTypeFaceID,
-        });
+        
+        resolve({ any: hasBio });
 
       } catch (ex) {
         console.log(`fingerprint-auth.available: ${ex}`);
